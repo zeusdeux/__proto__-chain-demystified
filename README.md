@@ -5,4 +5,4 @@ A few tests that I wrote to clarify my doubts about the `__proto__` chain and `_
 
 ##How to run it?
 
-- Copy paste contents of `runme.js` in your browser console (preferable Chrome)
+- Copy paste contents of `runme.js` in your browser console (preferably Chrome)
