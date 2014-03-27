@@ -7,6 +7,8 @@
 	var code = color + 'font-size: 1.2em; font-family: monospace;';
 	var comment = 'color: #999; font-style: italic';
 	var normalText = color;
+
+	//alias .log and .dir (for future node compatibility)
 	var log = function() {
 		return console.log.apply(console,[].splice.call(arguments,0));
 	};
@@ -14,6 +16,7 @@
 		return console.dir.apply(console,[].splice.call(arguments,0));
 	};
 
+	//setup the function and object we will be using
 	function A() {
 		this.someValue = 20;
 	}
@@ -24,6 +27,7 @@
 
 	var aObj = new A();
 
+	//shows the code
 	function showSetupCode() {
 		log('\n%c%s', code, A.toString());
 		A.toString();
@@ -34,7 +38,9 @@
 		log('\n%cvar aObj = new A();', code);
 	}
 
+	//runs the tests
 	function runTests() {
+		//just for future node compatibility
 		if (!console.clear) {
 			console.clear = function() {
 				for (var i = 0; i < 100; i++) {
@@ -62,9 +68,10 @@
 		log('%c\nThe Inferences:', h2);
 		showInferences();
 
-		return "And we're done.";
+		return "And we're done. Contribute at https://github.com/zeusdeux/__proto__-chain-demystified";
 	}
 
+	//tests on var aObj = new A();
 	function testsOnSimpleObject() {
 		log('\n%caObj %c// aObj object i.e., Object of A (typeof Object and instanceof A & Object)', code, comment);
 		inspect(aObj); // aObj object i.e., Object of A (typeof Object and instanceof A & Object)
@@ -79,6 +86,7 @@
 		inspect(aObj.__proto__.__proto__.__proto__); // equal to null (end of __proto__ chain)
 	}
 
+	//tests on function A
 	function testsOnUserDefinedFunction() {
 		log('\n%cA %c// An object of type function', code, comment);
 		inspect(A); // An object of type function
@@ -93,6 +101,7 @@
 		inspect(A.__proto__.__proto__.__proto__); // equal to null (end of __proto__ chain)
 	}
 
+	//tests on Function object
 	function testsOnFunctionObject() {
 		log('\n%cFunction %c// An object of type function', code, comment);
 		inspect(Function); // An object of type function
@@ -108,6 +117,7 @@
 
 	}
 
+	//tests on Object object
 	function testsOnObjectObject() {
 		log('\n%cObject %c// An object of type function', code, comment);
 		inspect(Object); //An object of type function
@@ -122,6 +132,7 @@
 		inspect(Object.__proto__.__proto__.__proto__); // equal to null (end of __proto__ chain)
 	}
 
+	//display what is inferred
 	function showInferences() {
 		log('\n%c- (dot)%c__proto__ %ccan be chained to give us the parent\'s prototype ' +
 			'(for e.g., %cA.__proto__ === Function.prototype %c)', normalText, code, normalText, code, normalText);
@@ -134,6 +145,7 @@
 			' depending on new %c__proto__ %cvalue', normalText, code, normalText, code, normalText);
 	}
 
+	//RUN IT!
 	return runTests();
 
 })(console);
